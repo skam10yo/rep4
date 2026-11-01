@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ru" class="is-gated">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тлеющий Уголь — кальянный лаунж</title>
+<meta name="description" content="Тлеющий Уголь — тихий кальянный лаунж с 2019 года: кальяны на углях, чайная церемония, общий зал, приватная комната и веранда. Только для гостей старше 18 лет.">
+<meta name="theme-color" content="#2a0710">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Тлеющий Уголь">
+<meta property="og:title" content="Тлеющий Уголь — кальянный лаунж">
+<meta property="og:description" content="Кальяны на углях, чайная церемония и вечер, который никуда не спешит. 18+.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232a0710'/%3E%3Cpath d='M16 19l5 5.5-5 5.5-5-5.5z' fill='%23f3b25a'/%3E%3Cpath d='M16 16c-4-3 4-5 0-8.5C13.5 5 16.5 3 18 2M20.5 15c-2-2 2-3.5.5-6' fill='none' stroke='%23f3b25a' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;600;800&display=swap&subset=cyrillic">
+<noscript><style>.age{display:none!important}html.is-gated{overflow:auto}</style></noscript>
+<style>
+/* ==== ТОКЕНЫ ==== */
+:root{
+  --ink:#fff6ea;
+  --ink-2:rgba(255,241,224,.86);
+  --ink-3:rgba(255,236,214,.7);
+  --line:rgba(255,236,214,.42);
+  --gold:#f3b25a;
+  --honey:#f7cf7a;
+  --ember:#ff7b35;
+  --wine:#3a0a14;
+  --wine-deep:#22060d;
+  --night:#0b0608;
+  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --sans:"Manrope","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --p:0; --h:0;
+  color-scheme:dark;
+}
+
+/* ==== БАЗА ==== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--wine-deep);overflow-x:clip}
+html.is-gated{overflow:hidden}
+body{margin:0;min-height:100vh;background:var(--wine-deep);color:var(--ink);font:400 16px/1.6 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--honey);outline-offset:4px;border-radius:999px}
+::selection{background:var(--gold);color:var(--wine-deep)}
+.skip{position:fixed;left:16px;top:-60px;z-index:50;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--wine-deep);font:600 12px/1 var(--sans);text-decoration:none;transition:top .2s}
+.skip:focus-visible{top:16px}
+.eyebrow{font:600 11px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+@media (max-width:420px){.eyebrow{font-size:10px}}
+
+/* ==== КНОПКА-ПИЛЮЛЯ ==== */
+.pill{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:14px 30px;border:1px solid var(--line);border-radius:999px;font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:rgba(30,8,6,.18);overflow:hidden;isolation:isolate;cursor:pointer;transition:color .45s var(--ease),border-color .45s var(--ease)}
+.pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--ink);transform:scaleX(0);transform-origin:50% 50%;transition:transform .55s var(--ease)}
+.pill:focus-visible{color:var(--wine-deep);border-color:var(--ink)}
+.pill:focus-visible::before{transform:scaleX(1)}
+@media (hover:hover){
+  .pill:hover{color:var(--wine-deep);border-color:var(--ink)}
+  .pill:hover::before{transform:scaleX(1)}
+}
+.pill--solid{background:var(--ink);color:var(--wine-deep);border-color:var(--ink)}
+.pill--solid::before{background:var(--honey)}
+
+/* ==== ФОН: 4 СЛОЯ ==== */
+/* 0 — база (тёплый янтарь), 1 — видео, 2 — CSS-дым, 3 — оверлей цвета, 4 — зерно */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:
+  radial-gradient(60% 40% at 50% 8%,#ffd98a 0%,#f2b04d 34%,transparent 72%),
+  radial-gradient(90% 70% at 50% 45%,#e59a3a 0%,#c8682a 45%,#7a2a17 80%,#3b0f0c 100%)}
+.bg__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;mix-blend-mode:screen}
+.bg__video.is-still{opacity:.45}
+.bg__smoke{position:absolute;inset:-10%;transition:opacity 1s}
+.bg__video~.bg__smoke{opacity:.45}
+.puff{position:absolute;display:block;width:var(--w,70vmax);height:var(--hgt,45vmax);left:var(--x);top:var(--y);border-radius:50%;filter:blur(var(--b,24px));will-change:transform;animation:drift var(--t,44s) ease-in-out var(--d,0s) infinite alternate}
+.puff--light{mix-blend-mode:screen;opacity:.7;background:
+  radial-gradient(circle at 26% 58%,rgba(255,236,206,.62) 0 15%,transparent 33%),
+  radial-gradient(circle at 44% 44%,rgba(255,230,196,.55) 0 18%,transparent 37%),
+  radial-gradient(circle at 63% 52%,rgba(255,222,184,.5) 0 16%,transparent 34%),
+  radial-gradient(circle at 80% 62%,rgba(255,226,190,.42) 0 12%,transparent 28%)}
+.puff--dark{mix-blend-mode:multiply;background:
+  radial-gradient(circle at 30% 55%,rgba(92,34,20,.75) 0 16%,transparent 36%),
+  radial-gradient(circle at 52% 42%,rgba(110,40,22,.62) 0 18%,transparent 38%),
+  radial-gradient(circle at 72% 58%,rgba(84,28,18,.7) 0 14%,transparent 32%)}
+.cl{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:auto;overflow:visible;will-change:transform;animation:drift var(--t,50s) ease-in-out var(--d,0s) infinite alternate}
+@keyframes drift{
+  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  50%{transform:translate3d(var(--dx,6vw),var(--dy,-3vh),0) scale(1.08) rotate(2deg)}
+  100%{transform:translate3d(calc(var(--dx,6vw)*-.6),calc(var(--dy,-3vh)*1.4),0) scale(.96) rotate(-2deg)}
+}
+.bg__tint{position:absolute;inset:0}
+.bg__tint--wine{opacity:0;background:
+  radial-gradient(120% 80% at 50% 25%,rgba(74,13,24,.84) 0%,rgba(46,8,16,.9) 55%,rgba(26,5,10,.95) 100%)}
+.bg__tint--night{opacity:0;background:
+  radial-gradient(120% 90% at 50% 40%,rgba(26,10,22,.9) 0%,rgba(11,6,8,.97) 70%)}
+.bg__sparks{position:absolute;inset:0}
+.spark{position:absolute;bottom:-12px;left:var(--x);width:var(--s,3px);height:var(--s,3px);border-radius:50%;background:#ffd08a;box-shadow:0 0 6px 2px rgba(255,140,60,.7);opacity:0;animation:rise var(--t,16s) linear var(--d,0s) infinite}
+@keyframes rise{
+  0%{transform:translate3d(0,0,0);opacity:0}
+  8%{opacity:.9}
+  30%{opacity:.35}
+  45%{opacity:.85}
+  70%{opacity:.25}
+  100%{transform:translate3d(var(--sway,30px),-105vh,0);opacity:0}
+}
+.bg__grain{position:absolute;inset:-60px;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px;animation:grain 1.2s steps(4) infinite}
+@keyframes grain{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-23px,17px,0)}50%{transform:translate3d(31px,-12px,0)}75%{transform:translate3d(-9px,-29px,0)}100%{transform:translate3d(14px,22px,0)}}
+
+/* смена цвета: янтарь → бордо → почти чёрный */
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@supports (animation-timeline: scroll()){
+  .bg__tint--wine{animation:fade-in linear both;animation-timeline:scroll(root);animation-range:5vh 95vh}
+  .bg__tint--night{animation:fade-in linear both;animation-timeline:scroll(root);animation-range:78% 100%}
+}
+@supports not (animation-timeline: scroll()){
+  .bg__tint--wine{opacity:clamp(0,calc((var(--h) - .05)*1.12),1)}
+  .bg__tint--night{opacity:clamp(0,calc((var(--p) - .78)*4.6),1)}
+}
+
+/* ==== ОКНО 18+ ==== */
+.age{width:min(440px,calc(100% - 32px));margin:auto;padding:0;border:1px solid rgba(255,236,214,.22);border-radius:28px;background:rgba(34,6,13,.9);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.55);text-align:center;overflow:hidden}
+.age[open]{animation:age-in .6s var(--ease) both}
+.age::backdrop{background:rgba(12,3,5,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.age__body{padding:clamp(28px,7vw,44px) clamp(22px,6vw,40px)}
+.age__mark{width:44px;height:44px;margin:0 auto 18px;color:var(--gold)}
+.age h2{font:300 clamp(1.9rem,6.5vw,2.4rem)/1.05 var(--serif);margin:12px 0 14px}
+.age p{color:var(--ink-2);font-size:15px}
+.age__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.age__actions .pill{flex:1 1 150px}
+.age__denied{display:none;margin-top:20px;color:var(--honey)}
+.age.is-denied .age__denied{display:block}
+.age.is-leaving{animation:age-out .4s ease both}
+@keyframes age-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes age-out{to{opacity:0;transform:translateY(-10px) scale(.98)}}
+
+/* ==== НАВИГАЦИЯ ==== */
+.nav{position:fixed;top:max(14px,env(safe-area-inset-top));left:50%;z-index:20;transform:translateX(-50%);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(4px,2vw,22px);width:min(560px,calc(100% - 32px));padding:6px clamp(8px,2.4vw,20px);border:1px solid rgba(255,238,218,.3);border-radius:999px;background:rgba(36,10,8,.56);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);animation:fade-down 1s var(--ease) .1s both}
+.nav__side{display:flex;justify-content:space-around;gap:clamp(2px,1.5vw,16px)}
+.nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 clamp(4px,1.4vw,12px);font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-radius:999px;transition:color .3s,background .3s}
+.nav a:hover{background:rgba(255,240,220,.12)}
+.nav .nav__logo{width:44px;height:44px;padding:0;justify-content:center;color:var(--honey)}
+.nav__logo svg{width:28px;height:28px;transition:transform .6s var(--ease)}
+.nav__logo:hover svg{transform:rotate(-8deg) scale(1.08)}
+@media (min-width:600px){.nav a{font-size:11px}}
+@media (max-width:359px){.nav a{letter-spacing:.12em}}
+@keyframes fade-down{from{opacity:0;transform:translate(-50%,-14px)}to{opacity:1;transform:translate(-50%,0)}}
+
+main{position:relative;z-index:1}
+
+/* ==== HERO ==== */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:110px var(--gutter) 90px;text-align:center;view-timeline:--hero block}
+.hero::before{content:"";position:absolute;left:50%;top:50%;width:min(1400px,160vw);height:min(860px,110svh);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(66,18,4,.74),rgba(66,18,4,.68) 50%,rgba(66,18,4,.4) 74%,transparent);pointer-events:none}
+.hero__glow{position:absolute;left:50%;top:44%;width:min(620px,90vw);aspect-ratio:1.6;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,138,52,.28),transparent);mix-blend-mode:screen;pointer-events:none;animation:flicker 7s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:.75}18%{opacity:.95}22%{opacity:.6}40%{opacity:1}58%{opacity:.7}63%{opacity:.9}80%{opacity:.65}}
+.hero .eyebrow{color:var(--ink)}
+.hero__inner{position:relative;display:grid;justify-items:center;gap:clamp(18px,3vw,28px);max-width:920px}
+.px{will-change:transform}
+.title{display:grid;justify-items:center;line-height:.86;margin:4px 0 6px}
+.title__serif{font:300 clamp(3.5rem,15.5vw,9.6rem)/.95 var(--serif);letter-spacing:.02em}
+.title__sans{font:800 clamp(3.1rem,15vw,9.2rem)/.95 var(--sans);letter-spacing:-.02em;margin-top:.02em}
+.ch{display:inline-block;animation:ch-in 1.15s var(--ease) both;animation-delay:calc(.35s + var(--i) * 55ms)}
+.title__sans .ch{animation-delay:calc(.75s + var(--i) * 65ms)}
+@keyframes ch-in{
+  from{opacity:0;transform:translate3d(0,.45em,0);clip-path:inset(0 0 100% 0);filter:blur(8px)}
+  to{opacity:1;transform:none;clip-path:inset(-30% -20% -30% -20%);filter:blur(0)}
+}
+.hero__sub{max-width:34em;font:400 clamp(1.12rem,2.6vw,1.4rem)/1.45 var(--serif);color:var(--ink)}
+.hero__sub span{display:block;text-wrap:balance}
+.rise{animation:rise-in 1.1s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes rise-in{from{opacity:0;transform:translate3d(0,22px,0);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+.hero__cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:grid;justify-items:center;gap:10px;font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);padding-left:.2em}
+.hero__cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--ink),transparent);transform-origin:top;animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+html.is-gated .hero *,html.is-gated .nav{animation-play-state:paused}
+
+/* параллакс hero: каждый слой уходит со своей скоростью */
+@keyframes px{to{transform:translate3d(0,var(--shift),0);opacity:var(--fade,0)}}
+@supports (animation-timeline: view()){
+  .px{animation:px linear both;animation-timeline:--hero;animation-range:exit 0% exit 90%}
+}
+@supports not (animation-timeline: view()){
+  .px{transform:translate3d(0,calc(var(--h) * var(--shift)),0);opacity:calc(1 - var(--h) * 1.1)}
+}
+
+/* ==== ТИШИНА И ДЫМ ==== */
+.silence{position:relative;min-height:120vh;display:grid;place-items:center;padding:34vh var(--gutter) 22vh;text-align:center;overflow-x:clip}
+.clouds{position:absolute;inset:0 0 auto;height:60vh;pointer-events:none}
+.cloud{position:absolute;display:block;width:var(--w);height:auto;top:var(--y);left:var(--x);overflow:visible;will-change:transform}
+.cloud--l{--w:min(1000px,135vw);--x:-42%;--y:-14%}
+.cloud--r{--w:min(940px,125vw);--x:50%;--y:-10%}
+.cloud--m{--w:min(760px,110vw);--x:14%;--y:-26%;opacity:.75}
+.cloud--m{animation:bob 18s ease-in-out infinite alternate}
+.curl{position:absolute;left:50%;top:6vh;width:min(560px,92vw);transform:translateX(-50%);overflow:visible;pointer-events:none}
+.curl path{fill:none;stroke:url(#curl-g);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.silence__inner{position:relative;display:grid;justify-items:center;gap:clamp(18px,3vw,30px);max-width:760px}
+.silence__title{font:300 clamp(3rem,10vw,6.6rem)/.95 var(--serif);letter-spacing:.005em}
+.silence__title em{font-style:italic;color:var(--honey)}
+.silence__text{font:400 clamp(1.2rem,2.8vw,1.6rem)/1.4 var(--serif);color:var(--ink)}
+.silence__text span{display:block;text-wrap:balance}
+
+/* проявление при скролле */
+.js .reveal{opacity:0;transform:translate3d(0,26px,0);filter:blur(6px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:calc(var(--i,0) * 110ms)}
+.js .reveal.in-view{opacity:1;transform:none;filter:none}
+.js .js-io .cloud--l{transform:translate3d(0,0,0);transition:transform 2.4s var(--ease)}
+.js .js-io .cloud--r{transform:none;transition:transform 2.4s var(--ease)}
+.js .js-io.in-view .cloud--l{transform:translate3d(-22%,-6%,0)}
+.js .js-io.in-view .cloud--r{transform:translate3d(22%,-4%,0)}
+.js .js-io .curl path{transition:stroke-dashoffset 3s var(--ease) .3s}
+.js .js-io.in-view .curl path{stroke-dashoffset:0}
+@keyframes bob{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,-4%,0)}}
+@keyframes reveal{from{opacity:0;transform:translate3d(0,40px,0);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes part-l{from{transform:translate3d(8%,6%,0)}to{transform:translate3d(-26%,-10%,0)}}
+@keyframes part-r{from{transform:translate3d(-8%,6%,0)}to{transform:translate3d(26%,-8%,0)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@supports (animation-timeline: view()){
+  .js .reveal{opacity:1;transform:none;filter:none;transition:none;animation:reveal linear both;animation-timeline:view();animation-range:entry calc(var(--i,0) * 5%) cover calc(24% + var(--i,0) * 3%)}
+  .cloud--l{animation:part-l linear both;animation-timeline:view();animation-range:entry 0% exit 40%}
+  .cloud--r{animation:part-r linear both;animation-timeline:view();animation-range:entry 0% exit 40%}
+  .curl path{animation:draw linear both;animation-timeline:view();animation-range:entry 20% cover 55%}
+}
+
+/* ==== REDUCED MOTION ==== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .puff,.cl,.spark,.bg__grain,.hero__glow,.cloud--m,.hero__cue i{animation:none!important}
+  .spark{display:none}
+  .px,.cloud--l,.cloud--r{animation:none!important;transform:none!important;opacity:1!important}
+  .ch,.rise,.nav,.age[open]{animation-duration:.01s!important;animation-delay:0s!important}
+  .js .reveal{animation:none!important;transition:opacity .4s!important;transform:none!important;filter:none!important;opacity:1!important}
+  .curl path{animation:none!important;stroke-dashoffset:0!important}
+  .pill::before{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<!-- ==== ОКНО 18+ ==== -->
+<dialog class="age" id="age" open closedby="none" aria-labelledby="age-title" aria-describedby="age-text">
+  <div class="age__body">
+    <svg class="age__mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#logo"/></svg>
+    <p class="eyebrow">Тлеющий Уголь · 18+</p>
+    <h2 id="age-title">Сайт только для совершеннолетних</h2>
+    <p id="age-text">Здесь рассказывают о кальянах и табаке. Подтвердите, что вам уже исполнилось 18&nbsp;лет.</p>
+    <div class="age__actions">
+      <button class="pill pill--solid" type="button" data-age="yes">Мне есть 18</button>
+      <button class="pill" type="button" data-age="no">Выйти</button>
+    </div>
+    <p class="age__denied" role="status" tabindex="-1">Приходите, когда исполнится 18. Мы подождём.</p>
+  </div>
+</dialog>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 32 32">
+    <path d="M16 19l5 5.5-5 5.5-5-5.5z" fill="currentColor"/>
+    <path d="M16 16c-4-3 4-5 0-8.5C13.5 5 16.5 3 18 2M20.5 15c-2-2 2-3.5.5-6M11.5 15.5c-1.6-1.8 1.4-3-.2-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <filter id="billow" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".028" numOctaves="4" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="9"/>
+  </filter>
+  <filter id="billow-lit" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".034" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="38" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="7.5"/>
+  </filter>
+  <!-- тень облака = fill у <use>, свет = color у <use> -->
+  <symbol id="cu-a" viewBox="0 0 600 260" overflow="visible">
+    <g filter="url(#billow)">
+      <ellipse cx="300" cy="206" rx="262" ry="50"/>
+      <circle cx="122" cy="180" r="72"/><circle cx="232" cy="160" r="98"/><circle cx="360" cy="164" r="104"/><circle cx="482" cy="186" r="78"/>
+    </g>
+    <g filter="url(#billow-lit)" fill="currentColor" opacity=".92">
+      <circle cx="110" cy="160" r="52"/><circle cx="210" cy="132" r="76"/><circle cx="334" cy="124" r="82"/><circle cx="462" cy="160" r="54"/>
+      <circle cx="280" cy="86" r="58"/><circle cx="390" cy="98" r="48"/><circle cx="176" cy="106" r="40"/>
+    </g>
+    <g filter="url(#billow-lit)" fill="#fff4e4" opacity=".35">
+      <circle cx="262" cy="66" r="38"/><circle cx="196" cy="98" r="30"/><circle cx="330" cy="86" r="40"/><circle cx="96" cy="140" r="26"/>
+    </g>
+  </symbol>
+  <symbol id="cu-b" viewBox="0 0 600 260" overflow="visible">
+    <g filter="url(#billow)">
+      <ellipse cx="290" cy="202" rx="252" ry="54"/>
+      <circle cx="150" cy="174" r="86"/><circle cx="300" cy="154" r="112"/><circle cx="450" cy="180" r="88"/>
+    </g>
+    <g filter="url(#billow-lit)" fill="currentColor" opacity=".92">
+      <circle cx="138" cy="150" r="62"/><circle cx="282" cy="114" r="88"/><circle cx="432" cy="152" r="66"/>
+      <circle cx="220" cy="78" r="48"/><circle cx="350" cy="62" r="44"/>
+    </g>
+    <g filter="url(#billow-lit)" fill="#fff4e4" opacity=".3">
+      <circle cx="214" cy="62" r="32"/><circle cx="300" cy="72" r="44"/><circle cx="120" cy="134" r="28"/>
+    </g>
+  </symbol>
+  <linearGradient id="curl-g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd08a" stop-opacity="0"/>
+    <stop offset=".45" stop-color="#ffb867"/>
+    <stop offset="1" stop-color="#ff7b35" stop-opacity=".2"/>
+  </linearGradient>
+</svg>
+
+<!-- ==== ФОН ==== -->
+<div class="bg" aria-hidden="true">
+  <!--MEDIA:VIDEO-->
+  <div class="bg__smoke">
+    <i class="puff puff--light" style="--x:5%;--y:5%;--w:90vmax;--hgt:60vmax;--t:52s;--dx:6vw;--dy:3vh"></i>
+    <i class="puff puff--dark"  style="--x:-35%;--y:40%;--w:70vmax;--t:40s;--d:-6s;--dx:7vw;--dy:-6vh"></i>
+    <i class="puff puff--dark"  style="--x:70%;--y:30%;--w:60vmax;--t:60s;--d:-33s;--dx:-8vw;--dy:-4vh"></i>
+    <svg class="cl" style="--x:52%;--y:-4%;--w:68vmax;--t:58s;--d:-14s;--dx:-5vw;--dy:2vh" viewBox="0 0 600 260"><use href="#cu-b" fill="#3a120b" color="#86452a"/></svg>
+    <svg class="cl" style="--x:-22%;--y:-9%;--w:58vmax;--t:47s;--d:-30s;--dx:5vw;--dy:3vh" viewBox="0 0 600 260"><use href="#cu-a" fill="#40150c" color="#9a5430" transform="translate(600 0) scale(-1 1)"/></svg>
+    <svg class="cl" style="--x:-6%;--y:26%;--w:34vmax;--t:39s;--d:-8s;--dx:6vw;--dy:-2vh;opacity:.85" viewBox="0 0 600 260"><use href="#cu-b" fill="#b0623e" color="#ffdcb4"/></svg>
+    <svg class="cl" style="--x:-16%;--y:64%;--w:74vmax;--t:55s;--d:-20s;--dx:7vw;--dy:-3vh" viewBox="0 0 600 260"><use href="#cu-a" fill="#7a3324" color="#f7caa0"/></svg>
+    <svg class="cl" style="--x:56%;--y:70%;--w:66vmax;--t:50s;--d:-36s;--dx:-6vw;--dy:-2vh" viewBox="0 0 600 260"><use href="#cu-b" fill="#6e2c21" color="#f3bf93" transform="translate(600 0) scale(-1 1)"/></svg>
+  </div>
+  <div class="bg__tint bg__tint--wine"></div>
+  <div class="bg__tint bg__tint--night"></div>
+  <div class="bg__sparks">
+    <i class="spark" style="--x:12%;--t:17s;--d:-2s;--sway:40px"></i>
+    <i class="spark" style="--x:27%;--t:22s;--d:-11s;--s:2px;--sway:-30px"></i>
+    <i class="spark" style="--x:41%;--t:19s;--d:-6s;--sway:24px"></i>
+    <i class="spark" style="--x:58%;--t:25s;--d:-15s;--s:2px;--sway:-44px"></i>
+    <i class="spark" style="--x:69%;--t:16s;--d:-9s;--sway:30px"></i>
+    <i class="spark" style="--x:83%;--t:21s;--d:-3s;--s:4px;--sway:-20px"></i>
+    <i class="spark" style="--x:92%;--t:27s;--d:-19s;--s:2px;--sway:36px"></i>
+  </div>
+  <div class="bg__grain"></div>
+</div>
+
+<!-- ==== НАВИГАЦИЯ ==== -->
+<nav class="nav" aria-label="Основная навигация">
+  <div class="nav__side"><a href="#menu">Меню</a><a href="#halls">Залы</a></div>
+  <a class="nav__logo" href="#top" aria-label="Тлеющий Уголь, наверх"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#logo"/></svg></a>
+  <div class="nav__side"><a href="#faq">Вопросы</a><a href="#booking">Бронь</a></div>
+</nav>
+
+<main id="main">
+  <!-- ==== HERO ==== -->
+  <header class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="px" style="--shift:-30px">
+        <p class="eyebrow rise" style="--d:.2s">Лаунж-бар · с 2019</p>
+      </div>
+      <h1 class="title px" style="--shift:-140px">
+        <span class="sr-only">Тлеющий Уголь</span>
+        <span class="title__serif" aria-hidden="true"><span class="ch" style="--i:0">Т</span><span class="ch" style="--i:1">Л</span><span class="ch" style="--i:2">Е</span><span class="ch" style="--i:3">Ю</span><span class="ch" style="--i:4">Щ</span><span class="ch" style="--i:5">И</span><span class="ch" style="--i:6">Й</span></span>
+        <span class="title__sans" aria-hidden="true"><span class="ch" style="--i:0">У</span><span class="ch" style="--i:1">Г</span><span class="ch" style="--i:2">О</span><span class="ch" style="--i:3">Л</span><span class="ch" style="--i:4">Ь</span></span>
+      </h1>
+      <div class="px" style="--shift:-220px">
+        <p class="hero__sub rise" style="--d:1.25s"><span>Кальяны на&nbsp;живых углях и&nbsp;чайная церемония</span><span>в&nbsp;полумраке, где вечер никуда не&nbsp;спешит.</span></p>
+      </div>
+      <div class="px" style="--shift:-300px">
+        <a class="pill rise" style="--d:1.5s" href="#booking">Забронировать стол</a>
+      </div>
+    </div>
+    <div class="hero__cue rise" style="--d:2s" aria-hidden="true">Листайте<i></i></div>
+  </header>
+
+  <!-- ==== ТИШИНА И ДЫМ ==== -->
+  <section class="silence js-io" id="silence" aria-labelledby="silence-title">
+    <div class="clouds" aria-hidden="true">
+      <svg class="cloud cloud--m" viewBox="0 0 600 260"><use href="#cu-b" fill="#5a2026" color="#c98a78"/></svg>
+      <svg class="cloud cloud--l" viewBox="0 0 600 260"><use href="#cu-a" fill="#6a2a26" color="#f2c3a0"/></svg>
+      <svg class="cloud cloud--r" viewBox="0 0 600 260"><use href="#cu-b" fill="#5e2423" color="#eab394" transform="translate(600 0) scale(-1 1)"/></svg>
+    </div>
+    <svg class="curl" viewBox="0 0 400 260" aria-hidden="true"><path pathLength="1" d="M200 258c-30-40 46-58 14-96-26-31-58-24-46-58 10-30 52-22 46-56C210 24 186 14 196 2"/></svg>
+    <div class="silence__inner">
+      <p class="eyebrow reveal">Атмосфера</p>
+      <h2 class="silence__title reveal" id="silence-title" style="--i:1">Тишина <em>и</em> дым</h2>
+      <p class="silence__text">
+        <span class="reveal" style="--i:2">Здесь не торопятся: угли разгораются медленно,</span>
+        <span class="reveal" style="--i:3">чай заваривают по второму кругу,</span>
+        <span class="reveal" style="--i:4">а вечер длится столько, сколько нужно вам.</span>
+      </p>
+      <a class="pill reveal" style="--i:5" href="#menu">Смотреть меню</a>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ==== JS: 18+, проявление, прогресс скролла, видео ==== */
+(() => {
+  const d = document, root = d.documentElement;
+  root.classList.add('js');
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* приватный режим */ } }
+  };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---- 18+ ---- */
+  const gate = d.getElementById('age');
+  const unlock = () => root.classList.remove('is-gated');
+  if (store.get('ugol-age') === 'ok' || !gate) { gate && gate.remove(); unlock(); }
+  else {
+    if (typeof gate.showModal === 'function') { gate.close(); gate.showModal(); }
+    let passed = false;
+    gate.addEventListener('cancel', (e) => e.preventDefault());
+    /* Chrome может закрыть окно по Esc вопреки preventDefault: открываем снова */
+    gate.addEventListener('close', () => { if (!passed && gate.isConnected) gate.showModal(); });
+    gate.querySelector('[data-age="yes"]').addEventListener('click', () => {
+      passed = true;
+      store.set('ugol-age', 'ok');
+      gate.classList.add('is-leaving');
+      setTimeout(() => { gate.close(); gate.remove(); unlock(); }, reduce.matches ? 0 : 380);
+    });
+    gate.querySelector('[data-age="no"]').addEventListener('click', () => {
+      gate.classList.add('is-denied');
+      gate.querySelector('.age__denied').focus();
+    });
+  }
+
+  /* ---- прогресс скролла (fallback для animation-timeline) ---- */
+  if (!CSS.supports('animation-timeline: scroll()')) {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = root.scrollHeight - innerHeight;
+      root.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0);
+      root.style.setProperty('--h', Math.min(scrollY / innerHeight, 1).toFixed(4));
+    };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+
+  /* ---- проявление при скролле (fallback для view()) ---- */
+  if (!CSS.supports('animation-timeline: view()')) {
+    const targets = d.querySelectorAll('.reveal, .js-io');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -12% 0px' });
+      targets.forEach((el) => io.observe(el));
+    } else targets.forEach((el) => el.classList.add('in-view'));
+  }
+
+  /* ---- фоновое видео: на узких экранах и при reduced motion — статичный кадр ---- */
+  const video = d.querySelector('.bg__video');
+  if (video) {
+    const small = matchMedia('(max-width: 600px)');
+    const sync = () => {
+      const still = small.matches || reduce.matches;
+      video.classList.toggle('is-still', still);
+      if (still) video.pause(); else video.play().catch(() => {});
+    };
+    video.addEventListener('error', () => video.remove(), true);
+    small.addEventListener('change', sync);
+    reduce.addEventListener('change', sync);
+    sync();
+  }
+})();
+</script>
+<!--MEDIA:CREDITS-->
+</body>
+</html>
