@@ -1,0 +1,13 @@
+---
+import { site } from '../data/site';
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__name">{site.name}</span>
+      <span>{site.address} · {site.hours.label}</span>
+    </div>
+    <p class="footer__warning">Курение вредит вашему здоровью. Только для лиц старше 18 лет.</p>
+    <p class="footer__meta">© {new Date().getFullYear()} {site.name}. Фото — см. CREDITS.md в репозитории.</p>
+  </div>
+</footer>

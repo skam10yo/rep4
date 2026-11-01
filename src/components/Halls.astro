@@ -1,0 +1,31 @@
+---
+import Photo from './Photo.astro';
+import { halls } from '../data/halls';
+---
+<section class="section halls" id="halls" aria-labelledby="halls-title">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Залы</p>
+      <h2 class="section__title" id="halls-title">Три пространства — <em>один настрой</em></h2>
+    </header>
+    <ul class="halls__list" role="list">
+      {halls.map((h) => (
+        <li class="hall card" data-cascade>
+          <div class="hall__media">
+            <Photo slot={h.photo} class="hall__img" sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw" />
+          </div>
+          <div class="hall__body">
+            <h3 class="hall__title">{h.title}</h3>
+            <p class="hall__text">{h.text}</p>
+            <dl class="hall__facts">
+              <div><dt>Вместимость</dt><dd>{h.capacity}</dd></div>
+              <div><dt>Минимальный заказ</dt><dd>{h.minOrder}</dd></div>
+              {h.season && <div><dt>Сезон</dt><dd>{h.season}</dd></div>}
+            </dl>
+            <a class="btn btn--ghost btn--sm hall__cta" href="#booking" data-hall-pick={h.id}>Выбрать этот зал</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

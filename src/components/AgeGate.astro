@@ -1,0 +1,18 @@
+<div class="age-backdrop" aria-hidden="true"></div>
+<dialog open class="age" id="age-gate" aria-labelledby="age-title" aria-describedby="age-text">
+  <div class="age__inner" data-age-step="ask">
+    <p class="eyebrow">18+</p>
+    <h2 id="age-title" class="age__title">Сайт только для совершеннолетних</h2>
+    <p id="age-text" class="age__text">
+      Здесь рассказывается о кальянах и табачной продукции. Подтвердите, пожалуйста, что вам исполнилось 18 лет.
+    </p>
+    <div class="age__actions">
+      <button type="button" class="btn btn--primary" data-age-yes>Мне есть 18</button>
+      <button type="button" class="btn btn--ghost" data-age-no>Выйти</button>
+    </div>
+  </div>
+  <div class="age__inner" data-age-step="bye" hidden>
+    <h2 class="age__title" tabindex="-1">Спасибо за честность</h2>
+    <p class="age__text">Этот сайт открыт только для гостей старше 18 лет. Будем рады видеть вас, когда придёт время.</p>
+  </div>
+</dialog>

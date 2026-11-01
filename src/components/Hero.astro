@@ -1,0 +1,24 @@
+---
+import Photo from './Photo.astro';
+import { site } from '../data/site';
+---
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__media" data-hero-media>
+    <Photo slot="hero" class="hero__img" sizes="100vw" loading="eager" priority widths={[640, 960, 1280, 1920, 2400]} />
+  </div>
+  <canvas class="smoke" data-smoke aria-hidden="true"></canvas>
+  <div class="hero__veil" aria-hidden="true"></div>
+  <div class="hero__content container">
+    <p class="eyebrow hero__eyebrow" data-hero-fade>Кальянный лаунж · {site.hours.label}</p>
+    <h1 class="hero__title" id="hero-title">
+      <span class="line"><span>Тлеющий</span></span>
+      <span class="line"><span><em>Уголь</em></span></span>
+    </h1>
+    <p class="hero__lead" data-hero-fade>{site.tagline}. Чай, неспешные разговоры и кальян, который готовят без спешки.</p>
+    <div class="hero__actions" data-hero-fade>
+      <a class="btn btn--primary btn--lg" href="#booking" data-magnetic>Забронировать стол</a>
+      <a class="btn btn--ghost btn--lg" href="#menu">Смотреть меню</a>
+    </div>
+  </div>
+  <a class="hero__scroll" href="#atmosphere" aria-label="Листать к разделу «Атмосфера»"><span aria-hidden="true"></span></a>
+</section>

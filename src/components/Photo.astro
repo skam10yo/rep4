@@ -1,0 +1,46 @@
+---
+// Реальное фото из src/assets/photos → <picture> с AVIF/WebP и srcset.
+// Если файла нет, сборка падает: заглушек на сайте быть не должно.
+// PHOTOS_OPTIONAL=1 — только для локальной проверки вёрстки без фото, не для продакшна.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import manifest from '../../photos.manifest.json';
+
+interface Props {
+  slot: string;
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  widths?: number[];
+}
+const { slot, sizes, class: cls, loading = 'lazy', priority = false, widths = [480, 800, 1200, 1600] } = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp}', { eager: true });
+const entry = Object.entries(files).find(([p]) => p.split('/').pop()!.replace(/\.\w+$/, '') === slot);
+const meta = manifest.photos.find((p) => p.slot === slot);
+if (!meta) throw new Error(`Слот фото «${slot}» не описан в photos.manifest.json`);
+const optional = process.env.PHOTOS_OPTIONAL === '1';
+if (!entry && !optional) {
+  throw new Error(`Нет файла src/assets/photos/${slot}.jpg. Заполните photos.manifest.json и выполните npm run photos.`);
+}
+const img = entry?.[1].default;
+const usable = img ? widths.filter((w) => w <= img.width) : [];
+---
+{img ? (
+  <Picture
+    src={img}
+    alt={meta.alt}
+    widths={usable.length ? usable : [img.width]}
+    sizes={sizes}
+    formats={['avif', 'webp']}
+    fallbackFormat="jpg"
+    quality={68}
+    loading={loading}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    class={cls}
+  />
+) : (
+  <span class:list={[cls, 'photo-missing']} role="img" aria-label={meta.alt} data-missing={slot}></span>
+)}

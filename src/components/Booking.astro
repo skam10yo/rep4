@@ -1,0 +1,98 @@
+---
+import { halls } from '../data/halls';
+// Слоты брони: каждые 30 минут с 16:00 до 01:00 (последняя бронь за час до закрытия).
+const slots: string[] = [];
+for (let m = 16 * 60; m <= 25 * 60; m += 30) {
+  const h = Math.floor(m / 60) % 24;
+  slots.push(`${String(h).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`);
+}
+---
+<section class="section booking" id="booking" aria-labelledby="booking-title">
+  <div class="container booking__layout">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Бронирование</p>
+      <h2 class="section__title" id="booking-title">Оставим стол <em>за вами</em></h2>
+      <p class="section__lead">Выберите дату, время и зал. Стол держим 15 минут после указанного времени.</p>
+      <ul class="booking__notes" role="list">
+        <li>Бронь — с 16:00 до 01:00</li>
+        <li>Приватная комната — до 8 гостей</li>
+        <li>Веранда — с мая по сентябрь</li>
+      </ul>
+    </header>
+
+    <div class="booking__panel card" data-reveal>
+      <form class="form" novalidate data-booking-form aria-describedby="form-hint">
+        <p id="form-hint" class="form__hint">Все поля, кроме комментария, обязательны.</p>
+        <div class="form__summary" role="alert" tabindex="-1" data-form-summary hidden></div>
+
+        <div class="field">
+          <label for="f-name">Как к вам обращаться</label>
+          <input id="f-name" name="name" type="text" autocomplete="given-name" maxlength="40" required aria-describedby="e-name" />
+          <p class="field__error" id="e-name" data-error-for="name"></p>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label for="f-date">Дата</label>
+            <input id="f-date" name="date" type="date" required aria-describedby="e-date" />
+            <p class="field__error" id="e-date" data-error-for="date"></p>
+          </div>
+          <div class="field">
+            <label for="f-time">Время</label>
+            <select id="f-time" name="time" required aria-describedby="e-time">
+              <option value="">Выберите</option>
+              {slots.map((s) => <option value={s}>{s}</option>)}
+            </select>
+            <p class="field__error" id="e-time" data-error-for="time"></p>
+          </div>
+          <div class="field">
+            <label for="f-guests">Гостей</label>
+            <input id="f-guests" name="guests" type="number" inputmode="numeric" min="1" max="12" step="1" value="2" required aria-describedby="e-guests" />
+            <p class="field__error" id="e-guests" data-error-for="guests"></p>
+          </div>
+        </div>
+
+        <fieldset class="field field--halls" aria-describedby="e-hall">
+          <legend>Зал</legend>
+          <div class="hall-options">
+            {halls.map((h, i) => (
+              <label class="hall-option">
+                <input type="radio" name="hall" id={i === 0 ? "f-hall" : undefined} value={h.id} data-max={h.maxGuests} data-title={h.title} checked={i === 0} required />
+                <span class="hall-option__box">
+                  <span class="hall-option__title">{h.title}</span>
+                  <span class="hall-option__meta">{h.capacity}{h.minOrder !== 'Не установлен' ? ` · мин. заказ ${h.minOrder}` : ''}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+          <p class="field__error" id="e-hall" data-error-for="hall"></p>
+        </fieldset>
+
+        <div class="field">
+          <label for="f-comment">Комментарий <span class="field__opt">(необязательно)</span></label>
+          <textarea id="f-comment" name="comment" rows="3" maxlength="300" placeholder="Например: стол у окна или повод вечера"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--lg form__submit" data-magnetic>Забронировать стол</button>
+      </form>
+
+      <div class="ticket" data-ticket hidden tabindex="-1" aria-labelledby="ticket-title">
+        <p class="eyebrow">Детали заявки</p>
+        <h3 class="ticket__title" id="ticket-title">Ваша бронь</h3>
+        <dl class="ticket__list">
+          <div><dt>Имя</dt><dd data-t="name"></dd></div>
+          <div><dt>Дата</dt><dd data-t="date"></dd></div>
+          <div><dt>Время</dt><dd data-t="time"></dd></div>
+          <div><dt>Гостей</dt><dd data-t="guests"></dd></div>
+          <div><dt>Зал</dt><dd data-t="hall"></dd></div>
+          <div data-t-wrap="comment"><dt>Комментарий</dt><dd data-t="comment"></dd></div>
+        </dl>
+        <p class="ticket__note">Сохраните эти детали или сделайте снимок экрана — назовите имя на входе.</p>
+        <div class="ticket__actions">
+          <button type="button" class="btn btn--ghost" data-ticket-edit>Изменить</button>
+          <button type="button" class="btn btn--ghost" data-ticket-new>Новая бронь</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

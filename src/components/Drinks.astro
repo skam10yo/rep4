@@ -1,0 +1,45 @@
+---
+import Photo from './Photo.astro';
+import { drinks } from '../data/drinks';
+const fmt = (n: number) => n.toLocaleString('ru-RU').replace(/ |\s/g, ' ') + ' ₽';
+---
+<section class="section drinks" id="drinks" aria-labelledby="drinks-title">
+  <div class="container drinks__layout">
+    <div class="drinks__aside">
+      <header class="section__head" data-reveal>
+        <p class="eyebrow">Чай и напитки</p>
+        <h2 class="section__title" id="drinks-title">Тёплое, <em>прохладное</em>, бодрящее</h2>
+        <p class="section__lead">Чай подбираем у проверенных поставщиков, лимонады готовим из свежих фруктов и трав. Алкоголь не подаём.</p>
+      </header>
+      <div class="drinks__photo" data-reveal>
+        <div class="atm__parallax" data-parallax>
+          <Photo slot="drinks" class="drinks__img" sizes="(min-width: 1024px) 38vw, 100vw" />
+        </div>
+      </div>
+    </div>
+    <div class="drinks__lists">
+      {drinks.map((g) => (
+        <section class="drink-group" aria-labelledby={`dg-${g.id}`} data-reveal>
+          <div class="drink-group__head">
+            <h3 id={`dg-${g.id}`}>{g.title}</h3>
+            <p>{g.note}</p>
+          </div>
+          <ul role="list">
+            {g.items.map((it) => (
+              <li class="drink">
+                <div class="drink__row">
+                  <span class="drink__name">{it.name}</span>
+                  <span class="drink__leader" aria-hidden="true"></span>
+                  <span class="drink__price">
+                    {fmt(it.price)}{'priceAlt' in it && it.priceAlt ? <span class="drink__alt"> / {fmt(it.priceAlt as number)}</span> : null}
+                  </span>
+                </div>
+                <p class="drink__desc">{it.desc}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>

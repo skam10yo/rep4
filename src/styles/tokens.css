@@ -1,0 +1,37 @@
+:root {
+  /* Палитра: графит, баклажан, медь и янтарь */
+  --graphite-950: #0f0e11;
+  --graphite-900: #141316;
+  --graphite-850: #1a181c;
+  --graphite-800: #211e24;
+  --aubergine-900: #1f1522;
+  --aubergine-800: #2a1b2e;
+  --aubergine-700: #3a2640;
+  --copper-600: #b06a36;
+  --copper-500: #c8834a;
+  --amber-400: #e6a65d;
+  --amber-300: #f2c48a;
+  --ember: #ff8a3d;
+
+  --text: #efe6dc;
+  --text-muted: #b8ab9d;     /* 8:1 на графите */
+  --text-dim: #9a8d80;       /* 5.3:1 на графите — только для мелких подписей */
+  --line: rgba(239, 230, 220, 0.12);
+  --line-strong: rgba(239, 230, 220, 0.22);
+  --error: #ff9b85;          /* 7.5:1 на графите */
+  --focus: #f2c48a;
+
+  --surface: rgba(30, 25, 33, 0.82);
+  --surface-strong: rgba(42, 30, 46, 0.86);
+
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-text: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius: 18px;
+  --radius-sm: 10px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-y: clamp(80px, 12vw, 160px);
+  --maxw: 1240px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --glow: 0 0 0 1px rgba(230, 166, 93, 0.25), 0 18px 60px -20px rgba(230, 140, 70, 0.45);
+}

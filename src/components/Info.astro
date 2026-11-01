@@ -1,0 +1,45 @@
+---
+import { site } from '../data/site';
+const rules = [
+  'Вход только для гостей старше 18 лет. Попросим показать документ — не обижайтесь, это закон.',
+  'Свой табак, кальяны и напитки приносить нельзя.',
+  'Кальян не выносим за пределы зала и веранды.',
+  'Держим бронь 15 минут после назначенного времени.',
+  'Говорим вполголоса — так всем уютнее.',
+  'С собаками небольших пород ждём на веранде.',
+];
+---
+<section class="section info" id="info" aria-labelledby="info-title">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Правила и контакты</p>
+      <h2 class="section__title" id="info-title">Как нас <em>найти</em></h2>
+    </header>
+    <div class="info__grid">
+      <div class="info__card card" data-cascade>
+        <h3>Часы работы</h3>
+        <p class="info__big">16:00–02:00</p>
+        <p>Ежедневно, без выходных. Последний кальян подаём в 01:00.</p>
+      </div>
+      <div class="info__card card" data-cascade>
+        <h3>Адрес</h3>
+        <address class="info__big info__addr">{site.address}</address>
+        <p>{site.addressNote}.</p>
+      </div>
+      <div class="info__card card" data-cascade>
+        <h3>Как добраться</h3>
+        <ul role="list" class="info__ways">
+          <li><strong>Пешком</strong> — семь минут вдоль набережной от центральной площади.</li>
+          <li><strong>На машине</strong> — парковка во дворе на десять мест, въезд со стороны набережной.</li>
+          <li><strong>На такси</strong> — укажите «Набережная Медников, 7, вход с торца».</li>
+        </ul>
+      </div>
+      <div class="info__card info__card--rules card" data-cascade>
+        <h3>Правила дома</h3>
+        <ol class="info__rules">
+          {rules.map((r) => <li>{r}</li>)}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

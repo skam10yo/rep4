@@ -1,0 +1,57 @@
+---
+import { site } from '../data/site';
+// Google Fonts (Cormorant Garamond + Manrope), раздаются с нашего домена через @fontsource:
+// только кириллица и латиница, только нужные начертания.
+import '@fontsource/manrope/cyrillic-400.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/cyrillic-500.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/cyrillic-600.css';
+import '@fontsource/manrope/latin-600.css';
+import '@fontsource/cormorant-garamond/cyrillic-500.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/cyrillic-600.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '@fontsource/cormorant-garamond/cyrillic-500-italic.css';
+import '@fontsource/cormorant-garamond/latin-500-italic.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/sections.css';
+
+const title = `${site.name} — кальянный лаунж · ${site.hours.label}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = new URL('/og-image.jpg', Astro.site).href;
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#141316" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // До отрисовки: если возраст уже подтверждён — окно не показываем; отмечаем, что JS работает.
+      document.documentElement.classList.add('js');
+      try { if (localStorage.getItem('tu-age-ok') === '1') document.documentElement.classList.add('age-ok'); } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

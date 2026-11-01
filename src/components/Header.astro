@@ -1,0 +1,22 @@
+---
+import { nav, site } from '../data/site';
+---
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="header" data-header>
+  <div class="header__bar container">
+    <a class="logo" href="#top" aria-label={`${site.name} — в начало`}>
+      <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8c4 8 14 13 14 27a14 14 0 0 1-28 0c0-8 4-11 6-16 1 4 3 6 5 7-1-6 1-13 3-18z" /></svg>
+      <span>Тлеющий&nbsp;Уголь</span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list" data-nav-toggle>
+        <span class="nav__toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only">Меню</span>
+      </button>
+      <ul class="nav__list" id="nav-list">
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="btn btn--primary btn--sm" href="#booking" data-magnetic>Забронировать</a>
+  </div>
+</header>

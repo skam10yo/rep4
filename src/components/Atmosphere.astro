@@ -1,0 +1,33 @@
+---
+import Photo from './Photo.astro';
+const shots = [
+  { slot: 'atm-sofas', title: 'Мягкий свет', text: 'Тёплые лампы на уровне глаз и глубокие диваны — здесь хочется задержаться.' },
+  { slot: 'atm-hookah', title: 'Внимание к деталям', text: 'Каждый кальян мастер собирает при вас и следит за ним весь вечер.' },
+  { slot: 'atm-coals', title: 'Ровный жар', text: 'Кокосовый уголь разжигаем заранее — без запаха и спешки.' },
+  { slot: 'atm-tea', title: 'Чайная пауза', text: 'Пуэры и улуны заваривают проливом, как это принято на родине чая.' },
+];
+---
+<section class="section atm" id="atmosphere" aria-labelledby="atm-title">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Атмосфера</p>
+      <h2 class="section__title" id="atm-title">Место, где вечер <em>замедляется</em></h2>
+      <p class="section__lead">Мы убрали всё лишнее: громкую музыку, яркий свет и суету. Остались тепло, тишина и хороший вкус.</p>
+    </header>
+    <div class="atm__grid">
+      {shots.map((s, i) => (
+        <figure class={`atm__item atm__item--${i + 1}`} data-reveal>
+          <div class="atm__frame">
+            <div class="atm__parallax" data-parallax>
+              <Photo slot={s.slot} class="atm__img" sizes="(min-width: 1024px) 45vw, (min-width: 640px) 50vw, 100vw" />
+            </div>
+          </div>
+          <figcaption>
+            <strong>{s.title}</strong>
+            <span>{s.text}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import Photo from './Photo.astro';
+import { bowls, categories, flavors, strengths } from '../data/menu';
+const fmt = (n: number) => n.toLocaleString('ru-RU').replace(/ |\s/g, ' ') + ' ₽';
+---
+<section class="section menu" id="menu" aria-labelledby="menu-title">
+  <div class="container">
+    <div class="menu__intro">
+      <header class="section__head" data-reveal>
+        <p class="eyebrow">Кальянное меню</p>
+        <h2 class="section__title" id="menu-title">Вкус и крепость — <em>под настроение</em></h2>
+        <p class="section__lead">Выберите направление и крепость. Если сомневаетесь, мастер подскажет и соберёт чашу под ваш вечер.</p>
+      </header>
+      <div class="menu__smoke" data-reveal aria-hidden="true">
+        <Photo slot="smoke" class="menu__smoke-img" sizes="(min-width: 1024px) 30vw, 60vw" />
+      </div>
+    </div>
+
+    <ul class="prices" role="list">
+      {bowls.map((b) => (
+        <li class="price card" data-cascade>
+          <span class="price__name">{b.name}</span>
+          <span class="price__value">{fmt(b.price)}</span>
+          <span class="price__note">{b.note}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="filters" data-filters>
+      <fieldset class="filters__group">
+        <legend>Вкус</legend>
+        <div class="chips">
+          <button type="button" class="chip" aria-pressed="true" data-filter="category" data-value="all">Все</button>
+          {Object.entries(categories).map(([k, c]) => (
+            <button type="button" class="chip" aria-pressed="false" data-filter="category" data-value={k}>{c.label}</button>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="filters__group">
+        <legend>Крепость</legend>
+        <div class="chips">
+          <button type="button" class="chip" aria-pressed="true" data-filter="strength" data-value="all">Любая</button>
+          {Object.entries(strengths).map(([k, s]) => (
+            <button type="button" class="chip" aria-pressed="false" data-filter="strength" data-value={k}>
+              <span class="dots" data-level={s.level} aria-hidden="true"><i></i><i></i><i></i></span>{s.label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      <p class="filters__count" role="status" aria-live="polite" data-filter-count>Показано вкусов: {flavors.length}</p>
+    </div>
+
+    <ul class="flavors" role="list" data-flavors>
+      {flavors.map((f) => (
+        <li class="flavor card" data-category={f.category} data-strength={f.strength} data-cascade>
+          <div class="flavor__top">
+            <span class="flavor__cat">{categories[f.category].label}</span>
+            <span class="flavor__strength" data-level={strengths[f.strength].level}>
+              <span class="dots" data-level={strengths[f.strength].level} aria-hidden="true"><i></i><i></i><i></i></span>
+              <span><span class="sr-only">Крепость: </span>{strengths[f.strength].label}</span>
+            </span>
+          </div>
+          <h3 class="flavor__name">{f.name}</h3>
+          <p class="flavor__taste">{f.taste}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="flavors__empty" data-flavors-empty hidden>Такого сочетания сейчас нет — попробуйте другую крепость или спросите мастера.</p>
+  </div>
+</section>

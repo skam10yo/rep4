@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import AgeGate from '../components/AgeGate.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Atmosphere from '../components/Atmosphere.astro';
+import HookahMenu from '../components/HookahMenu.astro';
+import Drinks from '../components/Drinks.astro';
+import Halls from '../components/Halls.astro';
+import Booking from '../components/Booking.astro';
+import Info from '../components/Info.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient__warm"></span>
+    <span class="ambient__lamp ambient__lamp--1"></span>
+    <span class="ambient__lamp ambient__lamp--2"></span>
+    <span class="ambient__lamp ambient__lamp--3"></span>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <AgeGate />
+  <Header />
+  <main id="main">
+    <Hero />
+    <Atmosphere />
+    <HookahMenu />
+    <Drinks />
+    <Halls />
+    <Booking />
+    <Info />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/main.ts';
+  </script>
+</Base>
