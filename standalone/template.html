@@ -22,7 +22,7 @@
 :root{
   --ink:#fff6ea;
   --ink-2:rgba(255,241,224,.86);
-  --ink-3:rgba(255,236,214,.7);
+  --ink-3:rgba(255,236,214,.8);
   --line:rgba(255,236,214,.42);
   --gold:#f3b25a;
   --honey:#f7cf7a;
@@ -111,13 +111,18 @@ h1,h2,h3,p{margin:0}
 
 /* смена цвета: янтарь → бордо → почти чёрный */
 @keyframes fade-in{from{opacity:0}to{opacity:1}}
-@supports (animation-timeline: scroll()){
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@supports (animation-timeline: scroll()) and (timeline-scope: --a){
+  body{timeline-scope:--night}
+  #faq{view-timeline:--night block}
   .bg__tint--wine{animation:fade-in linear both;animation-timeline:scroll(root);animation-range:5vh 95vh}
-  .bg__tint--night{animation:fade-in linear both;animation-timeline:scroll(root);animation-range:78% 100%}
+  .bg__tint--night{animation:fade-in linear both;animation-timeline:--night;animation-range:exit 0% exit 70%}
+  .nav::after{animation:grow linear both;animation-timeline:scroll(root)}
 }
-@supports not (animation-timeline: scroll()){
+@supports not ((animation-timeline: scroll()) and (timeline-scope: --a)){
   .bg__tint--wine{opacity:clamp(0,calc((var(--h) - .05)*1.12),1)}
-  .bg__tint--night{opacity:clamp(0,calc((var(--p) - .78)*4.6),1)}
+  .bg__tint--night{opacity:var(--n,0)}
+  .nav::after{transform:scaleX(var(--p))}
 }
 
 /* ==== ОКНО 18+ ==== */
@@ -138,6 +143,7 @@ h1,h2,h3,p{margin:0}
 
 /* ==== НАВИГАЦИЯ ==== */
 .nav{position:fixed;top:max(14px,env(safe-area-inset-top));left:50%;z-index:20;transform:translateX(-50%);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(4px,2vw,22px);width:min(560px,calc(100% - 32px));padding:6px clamp(8px,2.4vw,20px);border:1px solid rgba(255,238,218,.3);border-radius:999px;background:rgba(36,10,8,.56);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);animation:fade-down 1s var(--ease) .1s both}
+.nav::after{content:"";position:absolute;left:24px;right:24px;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--honey),transparent);transform-origin:left;transform:scaleX(0)}
 .nav__side{display:flex;justify-content:space-around;gap:clamp(2px,1.5vw,16px)}
 .nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 clamp(4px,1.4vw,12px);font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-radius:999px;transition:color .3s,background .3s}
 .nav a:hover{background:rgba(255,240,220,.12)}
@@ -222,10 +228,138 @@ html.is-gated .hero *,html.is-gated .nav{animation-play-state:paused}
   .curl path{animation:draw linear both;animation-timeline:view();animation-range:entry 20% cover 55%}
 }
 
+
+/* ==== ОБЩЕЕ ДЛЯ СЕКЦИЙ ==== */
+.sec{position:relative;padding:clamp(96px,15vh,170px) var(--gutter)}
+.wrap{max-width:1180px;margin-inline:auto}
+.sec__head{display:grid;justify-items:center;gap:18px;max-width:780px;margin:0 auto clamp(44px,7vw,80px);text-align:center}
+.sec__title{font:300 clamp(2.7rem,8.4vw,5.6rem)/.98 var(--serif);text-wrap:balance}
+.sec__title em{font-style:italic;color:var(--honey)}
+.sec__lead{font:400 clamp(1.12rem,2.4vw,1.38rem)/1.5 var(--serif);color:var(--ink-2);text-wrap:pretty}
+ul.prices,.mixes,.book__notes{list-style:none;margin:0;padding:0}
+@keyframes para{from{transform:translate3d(0,var(--from,40px),0)}to{transform:translate3d(0,calc(var(--from,40px) * -1),0)}}
+
+/* ==== ФОТО И ЗАГЛУШКИ ==== */
+.arch{margin:0;display:grid;gap:14px;text-align:center}
+.arch figcaption{font:600 10px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.arch__frame{position:relative;aspect-ratio:3/4.2;border-radius:999px 999px 18px 18px;overflow:hidden;border:1px solid rgba(255,236,214,.18);background:#1d0609;isolation:isolate}
+.arch__frame img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05);transition:transform 1.2s var(--ease)}
+.arch__frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,4,8,.45));pointer-events:none}
+.media__empty{position:absolute;inset:0;background:
+  radial-gradient(80% 45% at 50% 100%,rgba(255,123,53,.3),transparent 70%),
+  radial-gradient(60% 40% at 50% 28%,rgba(243,178,90,.1),transparent 70%),
+  linear-gradient(180deg,#2c0a11,#13040a)}
+.media__empty::before{content:"";position:absolute;left:50%;bottom:16%;width:44%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,160,80,.35),transparent);animation:flicker 6s ease-in-out infinite}
+@media (hover:hover){.hall:hover .arch__frame img,.arch:hover img{transform:scale(1.04)}}
+
+/* ==== КАЛЬЯННАЯ КАРТА ==== */
+.ritual{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2.4vw,28px);max-width:860px;margin:0 auto clamp(60px,9vw,110px)}
+.ritual .arch:nth-child(2){margin-top:clamp(16px,4vw,48px)}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;max-width:980px;margin:0 auto clamp(40px,6vw,64px)}
+.price{display:grid;gap:6px;padding:24px 26px;border:1px solid rgba(255,236,214,.18);border-radius:24px;background:rgba(255,236,214,.04)}
+.price__val{font:300 clamp(2.2rem,5vw,2.8rem)/1 var(--serif)}
+.price__note{font-size:14px;color:var(--ink-3)}
+.filter{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chip{min-height:42px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--wine-deep);border-color:var(--ink)}
+@media (hover:hover){.chip:hover{border-color:var(--ink)}}
+.count{margin:14px 0 clamp(32px,5vw,48px);text-align:center;font-size:13px;color:var(--ink-3)}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:clamp(14px,2vw,24px);align-items:start}
+.cat{padding:clamp(24px,3vw,34px);border:1px solid rgba(255,236,214,.14);border-radius:28px;background:linear-gradient(160deg,rgba(255,236,214,.07),rgba(255,236,214,.015))}
+.cat[hidden],.mix[hidden]{display:none}
+.cat h3{font:400 clamp(1.9rem,3.4vw,2.3rem)/1 var(--serif)}
+.cat__taste{margin:10px 0 18px;font-size:14px;color:var(--ink-3)}
+.mix{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 12px;padding:14px 0;border-top:1px solid rgba(255,236,214,.12);animation:fade-in .5s var(--ease)}
+.mix__name{font:600 15px/1.35 var(--sans)}
+.mix__desc{grid-column:1/-1;font-size:14px;line-height:1.5;color:var(--ink-3)}
+.str{display:inline-flex;align-items:center;gap:4px;font:600 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.str i{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.str i:last-of-type{margin-right:6px}
+.str[data-level="1"] i:nth-child(n+2),.str[data-level="2"] i:nth-child(3){background:rgba(255,236,214,.22)}
+
+/* ==== ЗАЛЫ ==== */
+.halls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(36px,4vw,40px) clamp(18px,3vw,36px)}
+.hall{display:grid;align-content:start;gap:14px}
+@media (min-width:700px){.halls{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:700px) and (max-width:1023px){.hall .facts{grid-template-columns:1fr}}
+.hall__frame{aspect-ratio:4/5;margin-bottom:8px}
+.hall h3{font:400 clamp(1.9rem,3.4vw,2.4rem)/1 var(--serif)}
+.hall p{font-size:15px;color:var(--ink-2)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 0;padding-top:14px;border-top:1px solid rgba(255,236,214,.14)}
+.facts dt{font:600 10px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.facts dd{margin:4px 0 0;font:400 1.2rem/1.3 var(--serif)}
+
+/* ==== ВОПРОСЫ И ОТВЕТЫ ==== */
+.qa{display:grid;gap:clamp(36px,5vw,56px) clamp(40px,7vw,110px);max-width:1040px;margin:0 auto}
+.qa__col{display:grid;gap:clamp(36px,5vw,56px);align-content:start}
+.qa__item h3{margin-bottom:12px;font:500 clamp(1.05rem,1.8vw,1.2rem)/1.3 var(--serif);letter-spacing:.06em;text-transform:uppercase}
+.qa__item p{font-size:15px;line-height:1.7;color:var(--ink-2)}
+@media (min-width:800px){.qa{grid-template-columns:1fr 1fr}.qa__col:nth-child(2){padding-top:clamp(90px,12vw,170px)}}
+
+/* ==== БРОНИРОВАНИЕ ==== */
+.book{display:grid;gap:clamp(36px,5vw,72px);align-items:start}
+.book__intro{display:grid;gap:20px}
+.book__intro .sec__title{text-align:left}
+.book__notes{display:grid;gap:14px;margin-top:8px}
+.book__notes li{display:grid;gap:4px;padding-top:14px;border-top:1px solid rgba(255,236,214,.14);font:400 1.15rem/1.3 var(--serif)}
+.book__notes .eyebrow{color:var(--ink-3)}
+@media (min-width:900px){.book{grid-template-columns:.9fr 1.1fr}}
+.form,.ticket{display:grid;gap:18px;padding:clamp(22px,4vw,40px);border:1px solid rgba(255,236,214,.18);border-radius:30px;background:rgba(22,5,9,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.form[hidden],.ticket[hidden]{display:none}
+.form__row{display:grid;gap:18px}
+@media (min-width:520px){.form__row{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:8px;min-width:0;margin:0;padding:0;border:0}
+.field label,.field legend{padding:0;font:600 10.5px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.field legend{margin-bottom:8px}
+.opt{letter-spacing:.08em;text-transform:none;color:var(--ink-3)}
+.field input,.field select,.field textarea{width:100%;min-height:52px;padding:0 16px;border:1px solid rgba(255,236,214,.3);border-radius:16px;background:rgba(255,240,220,.05);color:var(--ink);font:400 16px/1.4 var(--sans);transition:border-color .3s,background .3s}
+.field textarea{padding:14px 16px;resize:vertical;min-height:84px}
+.field select{appearance:none;-webkit-appearance:none;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23fff6ea' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.field option{background:#2a0710;color:var(--ink)}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:2px solid var(--honey);outline-offset:2px;border-radius:16px}
+.field ::placeholder{color:var(--ink-3)}
+[aria-invalid="true"]{border-color:#ff9f73!important;background:rgba(255,120,60,.08)!important}
+.err{min-height:1.3em;font-size:13px;line-height:1.3;color:#ffb894}
+.err:empty{min-height:0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{flex:1 1 120px;position:relative;letter-spacing:0;text-transform:none}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 14px;border:1px solid rgba(255,236,214,.3);border-radius:999px;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:background .35s var(--ease),color .35s var(--ease)}
+.seg input:checked+span{background:var(--ink);color:var(--wine-deep);border-color:var(--ink)}
+.seg input:focus-visible+span{outline:2px solid var(--honey);outline-offset:3px}
+.seg input[aria-invalid="true"]+span{border-color:#ff9f73}
+.form .pill{justify-self:start;margin-top:4px}
+.ticket{animation:rise-in .8s var(--ease) both}
+.ticket h3{font:300 clamp(2rem,5vw,2.8rem)/1.05 var(--serif)}
+.ticket h3::first-letter{text-transform:uppercase}
+.ticket .facts{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.ticket__note{font-size:14px;color:var(--ink-3)}
+.ticket .pill{justify-self:start}
+
+/* ==== ФУТЕР ==== */
+.foot{position:relative;z-index:1;padding:clamp(70px,12vw,140px) var(--gutter) calc(32px + env(safe-area-inset-bottom));text-align:center}
+.foot__mark{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 clamp(10px,2.2vw,30px);margin-bottom:clamp(40px,6vw,72px);line-height:.95}
+.foot__mark span{font:300 clamp(2.8rem,11vw,8rem)/1 var(--serif)}
+.foot__mark b{font:800 clamp(2.4rem,10vw,7.2rem)/1 var(--sans);letter-spacing:-.02em}
+.foot__grid{display:grid;gap:28px;padding:32px 0;border-top:1px solid rgba(255,236,214,.16);border-bottom:1px solid rgba(255,236,214,.16)}
+.foot__grid .eyebrow{margin-bottom:10px;color:var(--ink-3)}
+.foot__grid address,.foot__grid p:not(.eyebrow){font:400 1.15rem/1.45 var(--serif);font-style:normal}
+.foot__grid a{text-decoration:none;border-bottom:1px solid var(--line)}
+@media (min-width:760px){.foot__grid{grid-template-columns:repeat(3,1fr)}}
+.warn{margin-top:28px;padding:18px 22px;border:1px solid rgba(255,236,214,.3);border-radius:18px;font:600 12px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.foot__copy{margin-top:24px;font-size:13px;color:var(--ink-3)}
+.foot__copy a{color:var(--ink-2)}
+
+@supports (animation-timeline: view()){
+  .para{animation:para linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  .js .reveal.para{animation:reveal linear both,para linear both;animation-timeline:view(),view();animation-range:entry calc(var(--i,0) * 5%) cover calc(24% + var(--i,0) * 3%),cover 0% cover 100%;animation-composition:replace,add}
+}
+
 /* ==== REDUCED MOTION ==== */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .puff,.cl,.spark,.bg__grain,.hero__glow,.cloud--m,.hero__cue i{animation:none!important}
+  .puff,.cl,.spark,.bg__grain,.hero__glow,.cloud--m,.hero__cue i,.media__empty::before,.mix,.ticket{animation:none!important}
+  .para,.js .reveal.para{animation:none!important;transform:none!important}
   .spark{display:none}
   .px,.cloud--l,.cloud--r{animation:none!important;transform:none!important;opacity:1!important}
   .ch,.rise,.nav,.age[open]{animation-duration:.01s!important;animation-delay:0s!important}
@@ -378,7 +512,243 @@ html.is-gated .hero *,html.is-gated .nav{animation-play-state:paused}
       <a class="pill reveal" style="--i:5" href="#menu">Смотреть меню</a>
     </div>
   </section>
+  <!-- ==== КАЛЬЯННАЯ КАРТА ==== -->
+  <section class="sec" id="menu" aria-labelledby="menu-title">
+    <div class="sec__head">
+      <p class="eyebrow reveal para" style="--from:30px">Меню</p>
+      <h2 class="sec__title reveal para" id="menu-title" style="--i:1;--from:70px">Кальянная <em>карта</em></h2>
+      <p class="sec__lead reveal" style="--i:2">Шесть вкусовых семейств и три степени крепости. Мастер подберёт чашу под ваш вечер, а угли будет менять столько, сколько понадобится.</p>
+    </div>
+    <div class="ritual">
+      <figure class="arch reveal"><div class="arch__frame"><img src="media:coals" alt="Раскалённые угли с оранжевым свечением по краям" loading="lazy" decoding="async"></div><figcaption>Живые угли</figcaption></figure>
+      <figure class="arch reveal" style="--i:1"><div class="arch__frame"><img src="media:hookah" alt="Кальян крупным планом: стеклянная колба и металлическая шахта" loading="lazy" decoding="async"></div><figcaption>Чистая колба</figcaption></figure>
+      <figure class="arch reveal" style="--i:2"><div class="arch__frame"><img src="media:tea" alt="Глиняный чайник и пиалы на деревянной доске" loading="lazy" decoding="async"></div><figcaption>Чай к кальяну</figcaption></figure>
+    </div>
+    <ul class="prices" aria-label="Цены">
+      <li class="price reveal"><span class="eyebrow">Классический</span><span class="price__val">1&nbsp;800&nbsp;₽</span><span class="price__note">Глиняная чаша, любой вкус из карты</span></li>
+      <li class="price reveal" style="--i:1"><span class="eyebrow">Авторский</span><span class="price__val">2&nbsp;200&nbsp;₽</span><span class="price__note">Микс от мастера под ваше настроение</span></li>
+      <li class="price reveal" style="--i:2"><span class="eyebrow">На фрукте</span><span class="price__val">2&nbsp;600&nbsp;₽</span><span class="price__note">Чаша из грейпфрута или ананаса</span></li>
+    </ul>
+    <div class="filter" role="group" aria-label="Крепость">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">Все</button>
+      <button class="chip" type="button" data-filter="light" aria-pressed="false">Лёгкая</button>
+      <button class="chip" type="button" data-filter="medium" aria-pressed="false">Средняя</button>
+      <button class="chip" type="button" data-filter="strong" aria-pressed="false">Крепкая</button>
+    </div>
+    <p class="count" id="menu-count" aria-live="polite">Вкусов в карте: 18</p>
+    <div class="cats wrap">
+      <article class="cat reveal" style="--i:0">
+        <h3>Фруктовые</h3>
+        <p class="cat__taste">Спелая, плотная сладость и мягкий финал.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="light"><span class="mix__name">Персиковый сад</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Персик и абрикос с лёгкой кислинкой.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Груша и мёд</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Печёная груша, липовый мёд, щепоть корицы.</span></li>
+          <li class="mix" data-strength="strong"><span class="mix__name">Манго и маракуйя</span><span class="str" data-level="3"><i></i><i></i><i></i>крепкая</span><span class="mix__desc">Тропическая сладость с терпким послевкусием.</span></li>
+        </ul>
+      </article>
+      <article class="cat reveal" style="--i:1">
+        <h3>Ягодные</h3>
+        <p class="cat__taste">Сочная кислинка и густой ягодный аромат.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="light"><span class="mix__name">Лесная малина</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Малина и ежевика, как из летнего сада.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Чёрная смородина</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Ягода вместе с листом и лёгкой прохладой.</span></li>
+          <li class="mix" data-strength="strong"><span class="mix__name">Вишня и какао</span><span class="str" data-level="3"><i></i><i></i><i></i>крепкая</span><span class="mix__desc">Тёмная вишня и горьковатый шоколад.</span></li>
+        </ul>
+      </article>
+      <article class="cat reveal" style="--i:2">
+        <h3>Цитрусовые</h3>
+        <p class="cat__taste">Яркие, бодрые, с благородной горчинкой.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="light"><span class="mix__name">Лимонный тарт</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Лимон, сливочный крем и ваниль.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Грейпфрут и розмарин</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Свежая горчинка и травяная нота.</span></li>
+          <li class="mix" data-strength="strong"><span class="mix__name">Красный апельсин</span><span class="str" data-level="3"><i></i><i></i><i></i>крепкая</span><span class="mix__desc">Сладкий апельсин и тёплый имбирь.</span></li>
+        </ul>
+      </article>
+      <article class="cat reveal" style="--i:0">
+        <h3>Десертные</h3>
+        <p class="cat__taste">Мягкие и сливочные, для долгого вечера.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="light"><span class="mix__name">Карамельный попкорн</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Солёная карамель и сливочное масло.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Черничный чизкейк</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Сливочный сыр, песочное тесто, черника.</span></li>
+          <li class="mix" data-strength="strong"><span class="mix__name">Пахлава</span><span class="str" data-level="3"><i></i><i></i><i></i>крепкая</span><span class="mix__desc">Фисташка, мёд и грецкий орех.</span></li>
+        </ul>
+      </article>
+      <article class="cat reveal" style="--i:1">
+        <h3>Свежие</h3>
+        <p class="cat__taste">Прохлада, зелень и чистый, лёгкий дым.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="light"><span class="mix__name">Огурец и мята</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Хрустящая свежесть садовой грядки.</span></li>
+          <li class="mix" data-strength="light"><span class="mix__name">Арбуз со льдом</span><span class="str" data-level="1"><i></i><i></i><i></i>лёгкая</span><span class="mix__desc">Сочный арбуз и холодок в финале.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Ледяной лайм</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Лайм, мята и выраженная прохлада.</span></li>
+        </ul>
+      </article>
+      <article class="cat reveal" style="--i:2">
+        <h3>Авторские</h3>
+        <p class="cat__taste">Миксы наших мастеров, которых нет в других картах.</p>
+        <ul class="mixes">
+          <li class="mix" data-strength="strong"><span class="mix__name">Тлеющий уголь</span><span class="str" data-level="3"><i></i><i></i><i></i>крепкая</span><span class="mix__desc">Копчёная вишня, ваниль и тёплый дымок.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Чайная церемония</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Улун, жасмин и белый персик.</span></li>
+          <li class="mix" data-strength="medium"><span class="mix__name">Янтарь</span><span class="str" data-level="2"><i></i><i></i><i></i>средняя</span><span class="mix__desc">Облепиха, мёд и щепоть шафрана.</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==== ЗАЛЫ ==== -->
+  <section class="sec" id="halls" aria-labelledby="halls-title">
+    <div class="sec__head">
+      <p class="eyebrow reveal para" style="--from:30px">Залы</p>
+      <h2 class="sec__title reveal para" id="halls-title" style="--i:1;--from:70px">Три зала, <em>три</em> темпа</h2>
+      <p class="sec__lead reveal" style="--i:2">Выберите, каким будет вечер: шумным и общим, закрытым для своих или под открытым небом.</p>
+    </div>
+    <div class="halls wrap">
+      <article class="hall reveal">
+        <div class="arch__frame hall__frame"><img src="media:hall-main" alt="Общий зал: низкие диваны и тёплый свет ламп над столиками" loading="lazy" decoding="async"></div>
+        <h3>Общий зал</h3>
+        <p>Низкие диваны, приглушённые лампы и негромкая музыка. Подходит для свидания или встречи с друзьями.</p>
+        <dl class="facts"><div><dt>Вместимость</dt><dd>до 40 гостей</dd></div><div><dt>Минимальный заказ</dt><dd>один кальян на стол</dd></div></dl>
+      </article>
+      <article class="hall reveal" style="--i:1">
+        <div class="arch__frame hall__frame"><img src="media:hall-private" alt="Приватная комната с мягким диваном в приглушённом свете" loading="lazy" decoding="async"></div>
+        <h3>Приватная комната</h3>
+        <p>Отдельная комната с дверью, своей вытяжкой и свободным выбором музыки. Для дня рождения или долгого разговора.</p>
+        <dl class="facts"><div><dt>Вместимость</dt><dd>6–8 гостей</dd></div><div><dt>Минимальный заказ</dt><dd>от 9&nbsp;000&nbsp;₽</dd></div></dl>
+      </article>
+      <article class="hall reveal" style="--i:2">
+        <div class="arch__frame hall__frame"><img src="media:hall-veranda" alt="Вечерняя веранда с растениями и гирляндой тёплых огней" loading="lazy" decoding="async"></div>
+        <h3>Веранда</h3>
+        <p>Плетёная мебель, растения и гирлянды над головой. Пледы выдаём, как только садится солнце. Работает с мая по сентябрь.</p>
+        <dl class="facts"><div><dt>Вместимость</dt><dd>до 24 гостей</dd></div><div><dt>Минимальный заказ</dt><dd>один кальян на стол</dd></div></dl>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==== ВОПРОСЫ И ОТВЕТЫ ==== -->
+  <section class="sec" id="faq" aria-labelledby="faq-title">
+    <div class="sec__head">
+      <p class="eyebrow reveal para" style="--from:30px">Вопросы</p>
+      <h2 class="sec__title reveal para" id="faq-title" style="--i:1;--from:70px">Вопросы <em>и</em> ответы</h2>
+    </div>
+    <div class="qa">
+      <div class="qa__col">
+        <div class="qa__item reveal"><h3>Как забронировать стол?</h3><p>Через форму в конце страницы: выберите дату, время, число гостей и зал. Стол держим пятнадцать минут после назначенного времени, потом можем посадить за него других гостей.</p></div>
+        <div class="qa__item reveal" style="--i:1"><h3>Что входит в заказ кальяна?</h3><p>Чаша с выбранным вкусом, натуральный уголь, замена углей весь вечер и одноразовый мундштук. Мастер забьёт чашу при вас и подскажет, если захочется что-то изменить.</p></div>
+        <div class="qa__item reveal" style="--i:2"><h3>Сколько длится один кальян?</h3><p>Обычно от часа до полутора. Всё зависит от чаши и от того, насколько неспешно вы курите. Время за столом мы не ограничиваем.</p></div>
+      </div>
+      <div class="qa__col">
+        <div class="qa__item reveal"><h3>Можно ли прийти, если мне нет 18?</h3><p>Нет. Мы обслуживаем только совершеннолетних и просим показать документ всех, кто выглядит младше 25 лет. Даже в сопровождении взрослых гостей младше 18 мы не пускаем.</p></div>
+        <div class="qa__item reveal" style="--i:1"><h3>Есть ли чай и безалкогольные напитки?</h3><p>Да. Улуны, пуэры и травяные сборы мы завариваем по всем правилам: в глиняных чайниках, в несколько проливов. Ещё есть домашние лимонады, морсы и какао.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== БРОНИРОВАНИЕ ==== -->
+  <section class="sec" id="booking" aria-labelledby="booking-title">
+    <div class="book wrap">
+      <div class="book__intro">
+        <p class="eyebrow reveal">Бронь</p>
+        <h2 class="sec__title reveal" id="booking-title" style="--i:1">Оставьте <em>вечер</em> за собой</h2>
+        <p class="sec__lead reveal" style="--i:2">Выберите дату, время и зал. Приватная комната рассчитана на компанию от 6 до 8 человек, веранда работает с мая по сентябрь.</p>
+        <ul class="book__notes reveal" style="--i:3">
+          <li><span class="eyebrow">Часы</span>ежедневно, 16:00–02:00</li>
+          <li><span class="eyebrow">Последняя бронь</span>00:30</li>
+          <li><span class="eyebrow">Ожидание</span>15 минут после назначенного времени</li>
+        </ul>
+      </div>
+      <div class="book__panel reveal" style="--i:2">
+        <form class="form" id="book-form" novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-date">Дата</label>
+              <input id="f-date" name="date" type="date" required aria-describedby="err-date">
+              <p class="err" id="err-date"></p>
+            </div>
+            <div class="field">
+              <label for="f-time">Время</label>
+              <select id="f-time" name="time" required aria-describedby="err-time">
+                <option value="">Выберите</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+                <option value="23:30">23:30</option>
+                <option value="00:00">00:00</option>
+                <option value="00:30">00:30</option>
+              </select>
+              <p class="err" id="err-time"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-guests">Гости</label>
+            <select id="f-guests" name="guests" required aria-describedby="err-guests">
+              <option value="">Сколько вас?</option>
+                <option value="1">1 гость</option>
+                <option value="2">2 гостя</option>
+                <option value="3">3 гостя</option>
+                <option value="4">4 гостя</option>
+                <option value="5">5 гостей</option>
+                <option value="6">6 гостей</option>
+                <option value="7">7 гостей</option>
+                <option value="8">8 гостей</option>
+                <option value="9">9 гостей</option>
+                <option value="10">10 гостей</option>
+            </select>
+            <p class="err" id="err-guests"></p>
+          </div>
+          <fieldset class="field">
+            <legend>Зал</legend>
+            <div class="seg">
+              <label><input type="radio" name="hall" value="main" aria-describedby="err-hall"><span>Общий зал</span></label>
+              <label><input type="radio" name="hall" value="private" aria-describedby="err-hall"><span>Приватная</span></label>
+              <label><input type="radio" name="hall" value="veranda" aria-describedby="err-hall"><span>Веранда</span></label>
+            </div>
+            <p class="err" id="err-hall"></p>
+          </fieldset>
+          <div class="field">
+            <label for="f-note">Пожелания <span class="opt">необязательно</span></label>
+            <textarea id="f-note" name="note" rows="2" maxlength="200" placeholder="Например, стол у окна"></textarea>
+          </div>
+          <button class="pill pill--solid" type="submit">Забронировать</button>
+        </form>
+        <div class="ticket" id="book-result" hidden tabindex="-1" aria-labelledby="ticket-title">
+          <p class="eyebrow">Ваша бронь</p>
+          <h3 id="ticket-title" data-out="date"></h3>
+          <dl class="facts">
+            <div><dt>Время</dt><dd data-out="time"></dd></div>
+            <div><dt>Гости</dt><dd data-out="guests"></dd></div>
+            <div><dt>Зал</dt><dd data-out="hall"></dd></div>
+            <div data-out-wrap="note"><dt>Пожелания</dt><dd data-out="note"></dd></div>
+          </dl>
+          <p class="ticket__note">Это детали вашего визита в том виде, в каком вы их указали. Сохраните их или сделайте скриншот.</p>
+          <button class="pill" type="button" data-edit>Изменить</button>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<!-- ==== ФУТЕР ==== -->
+<footer class="foot">
+  <p class="foot__mark reveal" aria-hidden="true"><span>Тлеющий</span> <b>Уголь</b></p>
+  <div class="foot__grid wrap">
+    <div><p class="eyebrow">Адрес</p><address>Москва, Тихий переулок, 7<br>вход со двора, вниз по лестнице</address></div>
+    <div><p class="eyebrow">Часы</p><p>Ежедневно<br>16:00–02:00</p></div>
+    <nav aria-label="Навигация в подвале"><p class="eyebrow">Разделы</p><p><a href="#menu">Меню</a> · <a href="#halls">Залы</a> · <a href="#faq">Вопросы</a> · <a href="#booking">Бронь</a></p></nav>
+  </div>
+  <p class="warn wrap">Курение вредит вашему здоровью. Только для лиц старше 18 лет.</p>
+  <p class="foot__copy">© 2026 Тлеющий Уголь · <a href="#top">Наверх</a></p>
+</footer>
 
 <script>
 /* ==== JS: 18+, проявление, прогресс скролла, видео ==== */
@@ -414,13 +784,16 @@ html.is-gated .hero *,html.is-gated .nav{animation-play-state:paused}
   }
 
   /* ---- прогресс скролла (fallback для animation-timeline) ---- */
-  if (!CSS.supports('animation-timeline: scroll()')) {
+  if (!(CSS.supports('animation-timeline: scroll()') && CSS.supports('timeline-scope: --a'))) {
     let raf = 0;
+    const faq = d.getElementById('faq');
     const update = () => {
       raf = 0;
       const max = root.scrollHeight - innerHeight;
+      const night = faq ? -faq.getBoundingClientRect().bottom / innerHeight + 1 : 0;
       root.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0);
       root.style.setProperty('--h', Math.min(scrollY / innerHeight, 1).toFixed(4));
+      root.style.setProperty('--n', Math.min(Math.max(night / .7, 0), 1).toFixed(4));
     };
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener('resize', update);
@@ -451,6 +824,55 @@ html.is-gated .hero *,html.is-gated .nav{animation-play-state:paused}
     small.addEventListener('change', sync);
     reduce.addEventListener('change', sync);
     sync();
+  }
+
+  /* ---- фильтр кальянной карты по крепости ---- */
+  const chips = d.querySelectorAll('[data-filter]'), count = d.getElementById('menu-count');
+  chips.forEach((chip) => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter; let n = 0;
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    d.querySelectorAll('.mix').forEach((m) => { m.hidden = f !== 'all' && m.dataset.strength !== f; n += !m.hidden; });
+    d.querySelectorAll('.cat').forEach((c) => { c.hidden = !c.querySelector('.mix:not([hidden])'); });
+    count.textContent = `Вкусов в карте: ${n}`;
+  }));
+
+  /* ---- форма брони: валидация без сервера ---- */
+  const form = d.getElementById('book-form'), ticket = d.getElementById('book-result');
+  if (form && ticket) {
+    const pad = (n) => String(n).padStart(2, '0');
+    const iso = (t) => `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
+    const now = new Date(), last = new Date(); last.setDate(last.getDate() + 60);
+    form.date.min = iso(now); form.date.max = iso(last);
+    let tried = false;
+    const validate = () => {
+      const v = Object.fromEntries(new FormData(form)), e = {}, g = +v.guests || 0;
+      const nowTime = `${pad(new Date().getHours())}:${pad(new Date().getMinutes())}`;
+      if (!v.date) e.date = 'Выберите дату.';
+      else if (v.date < form.date.min || v.date > form.date.max) e.date = 'Бронь открыта на ближайшие 60 дней.';
+      if (!v.time) e.time = 'Выберите время.';
+      else if (v.date === form.date.min && v.time >= '16:00' && v.time <= nowTime) e.time = 'Это время сегодня уже прошло.';
+      if (!g) e.guests = 'Укажите, сколько будет гостей.';
+      if (!v.hall) e.hall = 'Выберите зал.';
+      else if (v.hall === 'private' && g && (g < 6 || g > 8)) e.hall = 'Приватная комната рассчитана на 6–8 гостей.';
+      else if (v.hall === 'veranda' && v.date && (+v.date.slice(5, 7) < 5 || +v.date.slice(5, 7) > 9)) e.hall = 'Веранда работает с мая по сентябрь.';
+      ['date', 'time', 'guests', 'hall'].forEach((k) => {
+        d.getElementById(`err-${k}`).textContent = e[k] || '';
+        form.querySelectorAll(`[name="${k}"]`).forEach((el) => el.setAttribute('aria-invalid', String(!!e[k])));
+      });
+      return { v, e };
+    };
+    form.addEventListener('change', () => { if (tried) validate(); });
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault(); tried = true;
+      const { v, e } = validate(), bad = Object.keys(e)[0];
+      if (bad) { form.querySelector(`[name="${bad}"]`).focus(); return; }
+      const label = (name) => { const el = form.querySelector(`[name="${name}"]`); return el.options ? el.options[el.selectedIndex].text : form.querySelector(`[name="${name}"]:checked`).nextElementSibling.textContent; };
+      const out = { date: new Date(`${v.date}T12:00`).toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' }), time: v.time, guests: label('guests'), hall: label('hall'), note: v.note.trim() };
+      Object.keys(out).forEach((k) => { ticket.querySelector(`[data-out="${k}"]`).textContent = out[k]; });
+      ticket.querySelector('[data-out-wrap="note"]').hidden = !out.note;
+      form.hidden = true; ticket.hidden = false; ticket.focus();
+    });
+    ticket.querySelector('[data-edit]').addEventListener('click', () => { ticket.hidden = true; form.hidden = false; form.date.focus(); });
   }
 })();
 </script>
